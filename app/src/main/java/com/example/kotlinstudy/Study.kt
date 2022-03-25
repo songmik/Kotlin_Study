@@ -5,12 +5,14 @@ package com.example.kotlinstudy
 
 /*
 1. 변수 : 값을 담아두는 박스
+
   - val : 박스 안에 값을 넣고, 테이프로 밀봉한 것 -> 값 변경 불가
   - var : 박스 안에 값으 넣고, 그대로 냅둔 것
 
 
 
 2. 숫자
+
   1) println("123") = 123(문자)
      println(123)   = 123(숫자)
 
@@ -21,6 +23,7 @@ package com.example.kotlinstudy
         println(123)   -> int(숫자)
 
 3. 자료형
+
  - 숫자와 문자가 헷갈릴 때 println(변수::class.java.simpleName) = string or int 로 출력 -> 숫자인지 문자인지 알 수 있음
  - 숫자를 문자로 변경 : .toString(), 문자를 숫자로 변경 : Integer.parseInt(변수) or .toInt()
  - ""와 null은 다르다. ""는 빈 문자열이고, null은 아무것도 없는 것
@@ -29,6 +32,7 @@ package com.example.kotlinstudy
 4. 조건문 : if-else , when
 
 5. 리스트
+
   1) 리스트 생성 방법 1
     val testList = ArrayList<String>()
     testList.add("a")
@@ -57,6 +61,7 @@ package com.example.kotlinstudy
 
 
 6. ?와 !!
+
     val test1 : String = "a"
     val test2 : String ?= "b"  -> '?'을 사용하면 null일 수도 있기 때문에 에러가 발생한다.
     test1 = test2!!            -> 이를 방지하기 위해 !!을 써주면 에러없이 값이 잘 나온다.
@@ -65,6 +70,7 @@ package com.example.kotlinstudy
 
 
 7. 반복문
+
     for ( i in range) {
 
     }
@@ -76,7 +82,8 @@ package com.example.kotlinstudy
 
 
 8. Map, Set
-    (1). Map : 여러 개의 값이 있을 때, 원하는 값을 찾을 때 사용( Index를 이용할 때보다 더 빠르고 간단)
+
+    (1). Map : 여러 개의 값이 있을 때, 원하는 값을 찾을 때 사용(Index를 이용할 때보다 더 빠르고 간단)
        - 방법 1
           val test1 = mutableMapOf<Int, String>()
           test1.put(5. "유리")
@@ -118,7 +125,8 @@ package com.example.kotlinstudy
 
 
 *** 문제 ***
-Q. 50점 이상인 사람들의 이름을 출력하세요
+Q. 50점 이상인 사람들의 이름을 출력하세요.
+
  val student = mutableMapOf<Int, String>()
  student[99] = "민지"
  student[20] = "철수"
@@ -144,6 +152,7 @@ Q. 50점 이상인 사람들의 이름을 출력하세요
 
 
 10. 함수
+
     fun main(){
         val sumValue = sum(20, 40)
         println(sumValue)
@@ -157,12 +166,14 @@ Q. 50점 이상인 사람들의 이름을 출력하세요
 
 
 11. 논리연산
+
    (1) AND : 둘 다 만족일 때 true( a == "남자" && b >= 20)
    (2) OR : 둘 중 하나만 만족일 때 true ( a == "남자" || b >= 20)
 
 
 
 12. 문자열 가공 : 유저가 입력한 데이터를 가공하거나 서버에서 가져온 데이터를 알맞게 가공해서 쓸 때 사용
+
     - 문자열 자르기 " split(자를 부분) "
       val test = "동해물과 백두산이 마르고 닳도록"
       val newTestString = test.split(" ")
@@ -170,6 +181,84 @@ Q. 50점 이상인 사람들의 이름을 출력하세요
 
     - 원하는 부분만 잘라서 가져오기 "substring(시작, 끝)" ** 끝은 포함 x
       val test = "동해물과 백두산이 마르고 닳도록"
+      val split = test.substring(0,2) -> '0'번째부터 '2'번째 전까지  = 0~1까지 출력 => 동해
+      println(split) = 동해
+
+    - 일부분을 바꾸기 "replace(바꾸고 싶은 부분, 바꾸고 싶은 내용)"
+      val test = "동해물과 백두산이 마르고 닳도록"
+      val replace = test.replace("백두산", "한라산")
+      println(replace) = 동해물과 한라산이 마르고 닳도록
+
+
+
+13. 엘비스 연산자 (Elvis Operator)
+
+    - null : 아무 것도 없는 것 -> null 처리 할 때는 "?" 붙이는 것 잊지 말기
+        fun findString (str: String) : Int {
+            return str?.length ?: 0    -> 값이 null이면 0을 리턴해주고, 아니면 str?.length 문자열의 길이를 리턴해줘라
+
+
+
+14. Any / is / as
+
+   - Any
+   - is -> 맞나 ? 확인
+   - as -> type casting (타입 변경 / 체크)
+
+
+15. list 가공하기
+
+   - 중복제거 : .distinct()
+   - 제일 큰 값 : .maxOrNull()
+   - 제일 작은 값 : .minOrNull()
+   - 평균값 : .average()
+   - 필터
+     val test = listOf("john", "jay", "minsu", "minji")
+     val result = test.filter {
+        it.startsWith("j")
+      }
+     println(result) = [john, jay]
+   - 결과를 묶어줌 : .groupBy {}
+
+
+16. Class (function -> 기능, class -> 설계 + 기능)
+  - fun main{
+      val dog = Dog("파트라슈", 10)
+      println(dog.getMyDogInfo())    -> 클래스를 만들고, 그 안에 함수를 외부에서 가져옴
+      }
+
+    class Dog(name: String, age: Int){
+      val dogName = name
+      val dogAge = age
+
+      fun getMyDogInfo() : String {
+           return "$dogName : $dogAge "
+         }
+
+
+17. 오버로딩 (overloading) : 겹겹히 쌓는다 (부모 클래스의 메소드를 자식 클래스에서 재정의해서 사용할 수 있음)
+                            -> 후에 생긴 함수의 조건에 따라 값이 변함
+
+
+18. 상속 (Inheritance) : 물려받는다 (자식 클래스가 부모 클래스의 멤버를 물려받음)
+
+   - class 앞에 open을 붙이고
+    open class AllJobs() {
+    }
+    class Job() : AllJobs(){                  -> (:AllJobs()가 상속받는다는 뜻)
+    }
+
+
+
+19. 추상클래스 (abstract class)
+
+   - class -> 붕어빵틀
+   - abstract class -> 기존에는 비어있고, 꽉 채워서 붕어빵을 만들어야 하는 틀
+   - 공통적으로 기능을 구현해주어야 할 때 사용
+
+
+
+
 
 
 
