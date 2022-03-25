@@ -256,7 +256,47 @@ Q. 50점 이상인 사람들의 이름을 출력하세요.
    - abstract class -> 기존에는 비어있고, 꽉 채워서 붕어빵을 만들어야 하는 틀
    - 공통적으로 기능을 구현해주어야 할 때 사용
 
+   fun main() {
 
+        BMW().wheel()
+        BMW().engine()
+   }
+
+
+   abstract class Car {
+
+        abstract fun wheel()
+        abstract fun engine()
+    }
+
+    class BMW() : Car {
+
+        override fun wheel() {
+            println("BMW 굴러갑니다.")
+        }
+
+        override fun engine() {
+            println("BMW 시동걸립니다.")
+        }
+     }
+
+
+20. 인터페이스(interface) : 추상클래스랑 비슷, 꼭 채워넣어야 하는 붕어빵 틀인데 작은 틀이라서 여러개를 넣을 수 있음
+
+
+   fun main() {
+
+
+   }
+
+   interface Car {
+
+        fun wheel()
+        fun engine()
+
+   }
+
+   class BMW() : Car {
 
 
 
