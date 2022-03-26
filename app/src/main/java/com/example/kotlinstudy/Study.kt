@@ -257,20 +257,17 @@ Q. 50점 이상인 사람들의 이름을 출력하세요.
    - 공통적으로 기능을 구현해주어야 할 때 사용
 
    fun main() {
-
         BMW().wheel()
         BMW().engine()
    }
 
 
    abstract class Car {
-
         abstract fun wheel()
         abstract fun engine()
     }
 
     class BMW() : Car {
-
         override fun wheel() {
             println("BMW 굴러갑니다.")
         }
@@ -283,22 +280,51 @@ Q. 50점 이상인 사람들의 이름을 출력하세요.
 
 20. 인터페이스(interface) : 추상클래스랑 비슷, 꼭 채워넣어야 하는 붕어빵 틀인데 작은 틀이라서 여러개를 넣을 수 있음
 
-
    fun main() {
-
-
+        BMW().autoDriving()
    }
 
-   interface Car {
-
-        fun wheel()
-        fun engine()
-
+   abstract Car {
+        abstract fun wheel()
+        abstract fun engine()
    }
 
-   class BMW() : Car {
+   interface CarAutoDriving {
+        fun autoDriving()
+    }
+
+   interface CarAutoParking {
+        fun autoParking()
+    }
+
+   class BMW() : Car(), CarAutoDriving, CarAutoParking {
+        override fun wheel() {
+            println("BMW 굴러감")
+         }
+
+        override fun engine() {
+            println("BMW 엔진시동")
+         }
+
+         override fun autoDriving() {
+            println("BMW 자율 주행")
+         }
+
+         override fun autoParking() {
+            println("BMW 자동 주차")
 
 
+21. 데이터 클래스 (Data Class) : 서버에서 데이터 받아온 것을 넣어 놓을 때 사용
+                                (class랑 같음, 서버에서 받아온다는 것이 차이점)
+
+
+22. 중첩 클래스 ( Nasted class) , 내부 클래스 ( Inner class)
+
+ - 중첩 클래스 -> 객체지향, 캡슐화 -> 외부에 있는 클래스로 접근 불가능
+ - 내부 클래스 -> RecyclerView -> 내부 클래스에 있는걸 가져와서 사용할 수 있음
+
+
+23. 람다 ( lambda ) : 선언되지 않았지만, 즉시 표현식으로 전달되는 함수
 
 
 
