@@ -438,6 +438,8 @@ class Dog(name: String, age: Int) {
 
  */
 
+
+
 // 28. infix function (중위 함수) : 중간에 끼어 넣는 함수라고 생각하면 된다. 숫자, 문자 상관없이 가능
 
 fun main(){
@@ -455,6 +457,8 @@ infix fun Int.sum3(num: Int) : Int {
 fun sum(a: Int, b:Int) : Int {
     return a+b
 }
+
+
 
 //29. Kotlin scope function( let / with / run / apply / also )
 
@@ -485,8 +489,270 @@ enum class Direction{
 }
 
 
+
 // ---------------------------------------------- //
+
+
+
 
 // 코틀린으로 알고리즘 연습하기
 
-// 1.
+
+
+// 1. 숫자 2개 더하기 기능이 있는 solution 을 완성하세요
+
+fun main(){
+
+    // 예시
+    val result1 = solution(1,2)
+    // 결과
+    println(result1) // 3
+
+    val result2 = solution(2,3)
+    println(result2) // 5
+
+}
+
+
+fun solution(a : Int, b : Int) : Int {
+    return a+b
+}
+
+
+
+//2. 아래와 같은 함수를 만들어보세요.
+
+// 여러 이메일이 담긴 리스트가 있어요!
+// 저는 구글로 가입한 사람과 네이버로 가입한 사람의 숫자와
+// 그 외의 이메일로 가입한 사람의 숫자를 보고 싶습니다.
+// @와 .을 기준으로 어느 사이트에서 들어온 사람들인지 구분을 합니다.
+// 아래와 같은 함수를 만들어보세요.
+
+fun main(){
+
+    val emailList1 = arrayListOf<String>("jay@naver.com",
+        "john@naver.com",
+        "emily@google.com",
+        "ken@google.com",
+        "minjun@kakao.com")
+    val result1 = solution(emailList1)
+    println(result1)
+    // 결과값 = {naver=2, google=2, else=1}
+
+    val emailList2 = arrayListOf<String>("Aiden@naver.com",
+        "Andew@naver.com",
+        "Adrian@daum.com",
+        "Asher@google.com",
+        "Austin@kakao.com",
+        "Antonio@google.com")
+    val result2 = solution(emailList2)
+    println(result2)
+    // 결과값 = {naver=2, google=2, else=2}
+
+}
+
+fun solution(emailList: ArrayList<String>) : Map<String, Int> {
+
+    val naverCount = 0
+    val googleCount = 0
+    val elseCount = 0
+
+    for (email in emailList){
+        val split = email.split("@")[1].split(".")[0]
+        if (split == "naver"){
+            naverCount +=1
+        } else if (split == "google"){
+            googleCount +=1
+        } else {
+            elseCount++
+        }
+    }
+    val returnMap = mutableMapOf<String, Int>()
+
+    returnMap["naver"] = naverCount
+    returnMap["google"] = googleCount
+    returnMap["else"] = elseCount
+
+    return returnMap
+}
+
+
+//3. 문자열의 숫자와 짝수(true)와 홀수(false)를 알려주는 solution을 만드세요
+
+fun main(){
+
+    val result1 = solution("abcd")
+    println(result1)
+    // [4, true]
+
+    val result2 = solution("abcde")
+    println(result2)
+    // [5, false]
+}
+
+
+fun solution(str : String) : ArrayList<String> {
+    val length = str.length
+    val function = length % 2 == 0
+
+    val arr = arrayListOf<String>(length.toString(), function.toString())
+    return arr
+}
+
+//4. 별이 아래와 같이 2배씩 늘어나며 출력되는 solution을 완성하세요
+
+fun main(){
+
+    solution(3)
+    // *
+    // **
+    // ****
+
+    solution(5)
+    // *
+    // **
+    // ****
+    // ********
+    // ****************
+}
+
+fun solution(star : Int){
+
+    val count = 1
+
+    for (i in 1..star) {
+        for (j in 1..count) {
+            print("*")
+        }
+        println("")
+        count++
+    }
+
+}
+
+
+//5. 리스트에 있는 숫자들을 모두 더한 후 리스트의 갯수로 나눈 값을 출력하는 solution을 만드세요
+
+fun main(){
+
+    val arr1 = arrayListOf<String>("1", "2")
+    val result1 = solution(arr1)
+    println(result1)
+    // 1.5
+
+    val arr2 = arrayListOf<String>("1", "2", "3", "4","5")
+    val result2 = solution(arr2)
+    println(result2)
+    // 3.0
+
+}
+
+
+fun solution(arr: ArrayList<String>): Double {
+
+    var sum = 0
+    var length = arr.size
+
+    for (i in arr){
+        sum+=i.toInt()
+    }
+
+    return sum.toDouble() / length.toDouble()
+}
+
+
+//6. 리스트의 숫자를 뒤집어서 반환하는 solution 을 만드세요
+
+fun main(){
+
+    val arr1 = arrayListOf(1,2,3,4,5)
+    val result1 = solution(arr1)
+    println(result1)
+    // [5,4,3,2,1]
+
+    val arr2 = arrayListOf(2,4,6,8)
+    val result2 = solution(arr2)
+    println(result2)
+    //  [8,6,4,2]
+
+}
+
+
+fun solution(arr: ArrayList<Int>) :ArrayList <String> {
+
+    val length = arr.size
+    val together = mutableListOf<String>()
+
+    for (i in 0..length-1){
+        together.add(arr[length-1-i].toString())
+    }
+    println(together)
+
+    return together as ArrayList<String> // 타입이 맞지 않아 as ArrayList<String>을 써줌
+
+}
+
+
+//7. 숫자를 받아서 팩토리얼 값을 출력하는 함수를 만드세요
+// 3! -> 3 x 2 x 1 = 6
+// 4! -> 4 x 3 x 2 x 1 = 24
+// 5! -> 5 x 4 x 3 x 2 x 1 = 120
+
+fun main(){
+
+    val result1 = solution(3)
+    println(result1)
+    // 6
+
+    val result2 = solution(4)
+    println(result2)
+    // 24
+
+    val result3 = solution(5)
+    println(result3)
+    // 120
+
+}
+
+
+fun solution( number : Int ) : Int {
+
+    var result = 1
+
+    for (i in 1..number) {
+        result *= i
+    }
+    return result
+}
+
+
+//8. 문자의 갯수를 세는 solution을 만들어주세요
+// 문자열이 많이 나온 순서대로 정렬됩니다.
+// 문자열 갯수가 같은 경우는 없다고 가정합니다. (a 는 5개 b 는 5개 이런 경우는 없습니다.)
+
+fun main(){
+
+    val result1 = solution("aabbaabccbb")
+    println(result1)
+    // {b=5, a=4, c=2}
+
+    val result2 = solution("ccddcddaaq")
+    println(result2)
+    // {d=4, c=3, a=2, q=1}
+
+}
+
+
+fun solution( str : String ): Map<String, Int> {
+
+
+}
+
+
+
+
+
+
+
+
+
