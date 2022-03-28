@@ -415,7 +415,7 @@ class Dog(name: String, age: Int) {
 
 27. 지연초기화 (lateninit / lazy)
 
-    fun main() {
+   fun main() {
 
         lateinit
         lateinit var lateString: String
@@ -434,3 +434,59 @@ class Dog(name: String, age: Int) {
     }
 
 */
+
+
+ */
+
+// 28. infix function (중위 함수) : 중간에 끼어 넣는 함수라고 생각하면 된다. 숫자, 문자 상관없이 가능
+
+fun main(){
+    println(10 sum1 20)
+}
+
+// 방법1
+infix fun Int.sum1(num: Int) :Int = this + num
+
+// 방법2
+infix fun Int.sum3(num: Int) : Int {
+    return this + num
+}
+
+fun sum(a: Int, b:Int) : Int {
+    return a+b
+}
+
+//29. Kotlin scope function( let / with / run / apply / also )
+
+// let : non null일 때 블럭안에 있는 함수 실행, 값이 null이면 함수가 동작하지 않음
+
+// with : 컨텍스트 내부에서 함수를 호출
+
+// run : 객체 초기화와 return 값 계산이 필요할 때 주로 사용
+
+// apply : 값을 반환하지 않고, 객체 구성에 대해 주로 사용
+
+// also : 객체에 대해 추가적인 작업
+
+
+
+//30. enum class : 값을 열거해서 사용할 때 사용
+fun main(){
+    println(Direction.NORTH)
+
+    // 값을 다 출력하고 싶을 때때
+   Direction.values().forEach {
+        println(it)
+    }
+}
+
+enum class Direction{
+    NORTH, SOUTH, WEST, EAST
+}
+
+
+// ---------------------------------------------- //
+
+// 코틀린으로 알고리즘 연습하기
+
+// 1.
