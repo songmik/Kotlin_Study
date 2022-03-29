@@ -745,12 +745,91 @@ fun main(){
 
 fun solution( str : String ): Map<String, Int> {
 
+    val resultArr = mutableListOf<String>()
 
+    for (i in str) {
+        resultArr.add(i.toString())
+    }
+
+    val dis = resultArr.distinct()
+    val countList = mutableListOf<Int>()
+
+    for (i in dis) {
+        val count = resultArr.filter { it == i }.count()
+        countList.add(count)
+    }
+
+    val resultMap = mutableMapOf<String, Int>()
+
+    for (i in 0..dis.count()-1){
+        resultMap[dis[i]] = countList[i]
+    }
+
+    return resultMap.toList().sortedBy { it.second}.reversed().toMap()
 }
 
 
 
+//9. 리스트의 가장 작은 숫자를 찾아서 제거하고 남은 숫자들을 모두 더해서 값을 출력해주는 함수를 만드세요
 
+fun main(){
+
+    val input1 = arrayListOf(1,2,3,4,5)
+    val result1 = solution(input1)
+    println(result1)
+    // 14
+
+    val input2 = arrayListOf(10,8,6,4,2)
+    val result2 = solution(input2)
+    println(result2)
+    // 28
+
+    val input3 = arrayListOf(6, 3, 9)
+    val result3 = solution(input3)
+    println(result3)
+    // 15
+}
+
+fun solution(list: ArrayList<Int>) : Int{
+
+    val min = list.minOrNull()
+    list.remove(min)
+
+    // minOrNull()을 모를때 가장 작은 값을 리스트의 첫 번째로 저장하는 식을 만들어준다
+//    var small = list[0]
+//
+//    for (i in 1..list.size-1){
+//        if (small > list[i]){
+//            small = list[i]
+//        }
+//    }
+
+    var result = 0
+
+    for (i in list) {
+        result += i
+    }
+    return result
+}
+
+//10. 가장 가까운 사람의 이름을 알려주는 함수를 완성하세요.(거리는 음수가 아닙니다 / 같은 거리는 없습니다.)
+
+fun main(){
+
+    val result1 = solution("민수 : 3, 민지  : 4, 찬혁 : 1.5, 지우 : 2")
+    println(result1)
+    // 찬혁
+
+    val result2 = solution("지영 : 3.7, 민영  : 1.2 , 해피 : 2.7, 퍼니 : 3")
+    println(result2)
+    // 민영
+
+}
+
+
+fun solution(str: String) : String{
+
+}
 
 
 
