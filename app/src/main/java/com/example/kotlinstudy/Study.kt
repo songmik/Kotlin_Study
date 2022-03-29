@@ -826,11 +826,58 @@ fun main(){
 
 }
 
-
 fun solution(str: String) : String{
 
+    val list = str.split(",")
+    val nameList = mutableListOf<String>()
+    val disList = mutableListOf<Double>()
+
+    for (item in list) {
+
+        val name = item.split(":")[0]
+        val dis = item.split(":")[1].toDouble()
+
+        nameList.add(name)
+        disList.add(dis)
+    }
+    val min = disList.minOrNull()
+    val index = disList.indexOf(min)
+
+    return nameList[index].trim() // trim : 양 옆 공백을 지워줌
 }
 
+
+//11. 여러개의 동전 중 가장 동전의 수를 적게 받을 수 있는 solution 을 만드세요
+
+// 1360 -> 500 x 2 / 100 x 3 / 50 x 1 / 10 x 1 = 7
+// 1510 -> 500 x 3 / 10 x 1 = 4
+
+fun main(){
+
+    val coins1 = arrayListOf<Int>(500, 100, 50, 10)
+    val money1 = 1360
+    val result1 = solution(coins1, money1)
+    println(result1)
+    // 7
+
+    val coins2 = arrayListOf<Int>(500, 100, 50, 10)
+    val money2 = 1510
+    val result2 = solution(coins2, money2)
+    println(result2)
+    // 4
+}
+
+fun solution(coins: ArrayList<Int>, money: Int) : Int{
+
+    var resultCount = 0
+    var currentMoney = money
+
+    for (coin in coins) {
+        resultCount = resultCount + currentMoney / coin
+        currentMoney = currentMoney % coin
+    }
+    return resultCount
+}
 
 
 
